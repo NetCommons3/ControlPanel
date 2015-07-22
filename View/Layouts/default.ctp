@@ -32,10 +32,23 @@
 	<body ng-controller="NetCommons.base">
 		<?php echo $this->Session->flash(); ?>
 
-		<?php echo $this->element('NetCommons.common_header'); ?>
+		<?php echo $this->element('NetCommons.common_header', array('container' => 'container-fluid')); ?>
 
 		<main class="container-fluid">
-			<?php echo $this->fetch('content'); ?>
+			<div class="row">
+				<!-- container-main -->
+				<div role="main" id="container-main" class="control-panel col-sm-10 col-sm-push-2">
+					<?php echo $this->fetch('content'); ?>
+				</div>
+
+				<!-- container-major -->
+				<div id="container-major" class="control-panel col-sm-2 col-sm-pull-10">
+					<?php echo $this->element('ControlPanel.render_control_panel_menu', array(
+							'plugins' => ControlPanelLayoutHelper::$plugins
+						)); ?>
+				</div>
+			</div>
+
 		</main>
 
 		<?php echo $this->element('NetCommons.common_footer'); ?>

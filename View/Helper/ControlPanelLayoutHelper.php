@@ -10,7 +10,6 @@
  */
 
 App::uses('AppHelper', 'View/Helper');
-App::uses('Container', 'Containers.Model');
 
 /**
  * ControlPanelLayoutHelper
@@ -21,6 +20,20 @@ App::uses('Container', 'Containers.Model');
 class ControlPanelLayoutHelper extends AppHelper {
 
 /**
+ * Plugins data
+ *
+ * @var array
+ */
+	public static $plugins;
+
+/**
+ * Plugins map data
+ *
+ * @var array
+ */
+	public static $pluginMap;
+
+/**
  * Default Constructor
  *
  * @param View $View The View this helper is being attached to.
@@ -28,5 +41,8 @@ class ControlPanelLayoutHelper extends AppHelper {
  */
 	public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
+
+		self::$plugins = $settings['plugins'];
+		self::$pluginMap = Hash::combine(self::$plugins, '{n}.Plugin.key', '{n}.Plugin');
 	}
 }

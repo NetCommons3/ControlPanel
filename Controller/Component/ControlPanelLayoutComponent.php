@@ -36,33 +36,37 @@ class ControlPanelLayoutComponent extends Component {
 		//Layoutのセット
 		$this->controller->layout = 'ControlPanel.default';
 
-//		//cancelUrlをセット
-//		if (! isset($this->controller->viewVars['cancelUrl'])) {
-//			$this->controller->set('cancelUrl', $page['page']['permalink']);
-//		}
+		////cancelUrlをセット
+		//if (! isset($this->controller->viewVars['cancelUrl'])) {
+		//	$this->controller->set('cancelUrl', $page['page']['permalink']);
+		//}
 		$this->controller->set('cancelUrl', '/');
 
 		$this->controller->set('isControlPanel', true);
 		$this->controller->set('hasControlPanel', true);
 
-//		//Pluginデータ取得
-//		$pluginsRoom = ClassRegistry::init('PluginManager.PluginsRoom');
-//		$plugins = $pluginsRoom->getPlugins($page['page']['roomId'], $this->controller->viewVars['languageId']);
-//
+		//Pluginデータ取得
+		$PluginsRole = ClassRegistry::init('PluginManager.PluginsRole');
+		$plugins = $PluginsRole->getPlugins(
+			PluginsRole::PLUGIN_TYPE_FOR_CONTROL_PANEL,
+			$this->controller->Auth->user('role_key'),
+			$this->controller->viewVars['languageId']
+		);
+
 		//ページHelperにセット
-//		$results = array(
-//			'current' => $this->controller->current,
-//			'containers' => Hash::combine($page['container'], '{n}.type', '{n}'),
-//			'boxes' => Hash::combine($page['box'], '{n}.id', '{n}', '{n}.containerId'),
-//			'plugins' => $this->controller->camelizeKeyRecursive($plugins),
-//		);
-		$this->controller->helpers['ControlPanel.ControlPanelLayout'] = array();
-//
-//		if (AuthComponent::user('id')) {
-//			$this->controller->set('isControlPanel', true);
-//		} else {
-//			$this->controller->set('isControlPanel', false);
-//		}
+		$results = array(
+			//'current' => $this->controller->current,
+			//'containers' => Hash::combine($page['container'], '{n}.type', '{n}'),
+			//'boxes' => Hash::combine($page['box'], '{n}.id', '{n}', '{n}.containerId'),
+			'plugins' => $plugins,
+		);
+		$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
+
+		//if (AuthComponent::user('id')) {
+		//	$this->controller->set('isControlPanel', true);
+		//} else {
+		//	$this->controller->set('isControlPanel', false);
+		//}
 	}
 
 }
