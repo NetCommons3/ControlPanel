@@ -20,6 +20,13 @@ App::uses('Component', 'Controller');
 class ControlPanelLayoutComponent extends Component {
 
 /**
+ * Plugins data
+ *
+ * @var array
+ */
+	public $plugins = null;
+
+/**
  * beforeRender
  *
  * @param Controller $controller Controller
@@ -46,19 +53,22 @@ class ControlPanelLayoutComponent extends Component {
 		$this->controller->set('hasControlPanel', true);
 
 		//Pluginデータ取得
-		$PluginsRole = ClassRegistry::init('PluginManager.PluginsRole');
-		$plugins = $PluginsRole->getPlugins(
-			PluginsRole::PLUGIN_TYPE_FOR_CONTROL_PANEL,
-			$this->controller->Auth->user('role_key'),
-			$this->controller->viewVars['languageId']
-		);
+		if (! $this->plugins) {
+			$PluginsRole = ClassRegistry::init('PluginManager.PluginsRole');
+			$Plugin = ClassRegistry::init('PluginManager.Plugin');
+			$this->plugins = $PluginsRole->getPlugins(
+				$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
+				$this->controller->Auth->user('role_key'),
+				$this->controller->viewVars['languageId']
+			);
+		}
 
 		//ページHelperにセット
 		$results = array(
 			//'current' => $this->controller->current,
 			//'containers' => Hash::combine($page['container'], '{n}.type', '{n}'),
 			//'boxes' => Hash::combine($page['box'], '{n}.id', '{n}', '{n}.containerId'),
-			'plugins' => $plugins,
+			'plugins' => $this->plugins,
 		);
 		$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
 

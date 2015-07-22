@@ -9,3 +9,7 @@
 .control-panel nav {
 	margin-top: 16px;
 }
+
+.control-panel .table td {
+	vertical-align: middle;
+}
