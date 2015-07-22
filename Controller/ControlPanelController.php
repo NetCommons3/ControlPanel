@@ -1,6 +1,6 @@
 <?php
 /**
- * ControlPanelApp Controller
+ * ControlPanel Controller
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -9,15 +9,22 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AppController', 'Controller');
+App::uses('ControlPanelAppController', 'ControlPanel.Controller');
 
 /**
- * ControlPanelApp Controller
+ * ControlPanel Controller
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\ControlPanel\Controller
  */
-class ControlPanelAppController extends AppController {
+class ControlPanelController extends ControlPanelAppController {
+
+/**
+ * use model
+ *
+ * @var array
+ */
+	//public $uses = array();
 
 /**
  * use component
@@ -25,6 +32,14 @@ class ControlPanelAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		'Security'
+		'ControlPanel.ControlPanelLayout'
 	);
+
+/**
+ * index
+ *
+ * @return void
+ */
+	public function index() {
+	}
 }
