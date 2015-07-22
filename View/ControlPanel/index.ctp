@@ -15,7 +15,6 @@
 		<h1>
 			<?php echo __d('notifications', 'Notifications'); ?>
 		</h1>
-
 		<hr>
 
 		<?php if ($notifications) : ?>
