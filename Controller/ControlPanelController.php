@@ -36,6 +36,7 @@ class ControlPanelController extends ControlPanelAppController {
 	public $components = array(
 		'ControlPanel.ControlPanelLayout'
 	);
+
 /**
  * helpers
  *
