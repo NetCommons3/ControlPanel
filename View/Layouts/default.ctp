@@ -22,6 +22,12 @@
 			echo $this->fetch('meta');
 
 			echo $this->element('NetCommons.common_css');
+			echo $this->Html->css(
+				array(
+					'/control_panel/css/style.css'
+				),
+				array('plugin' => false)
+			);
 			echo $this->fetch('css');
 
 			echo $this->element('NetCommons.common_js');
@@ -37,7 +43,7 @@
 		<main class="container-fluid">
 			<div class="row">
 				<!-- container-main -->
-				<div role="main" id="container-main" class="control-panel col-sm-10 col-sm-push-2">
+				<div role="main" id="container-main" class="control-panel frame col-sm-10 col-sm-push-2">
 					<?php echo $this->fetch('content'); ?>
 				</div>
 

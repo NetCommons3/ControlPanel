@@ -10,15 +10,16 @@
  */
 ?>
 
-<div class="list-group">
-	<?php foreach($plugins as $plugin) : ?>
-		<?php echo $this->Html->link(
-				$plugin['Plugin']['name'],
-				'/' . $plugin['Plugin']['key'] . '/' . $plugin['Plugin']['default_action'],
-				array(
-					'class' => 'list-group-item' . ($this->params['plugin'] === $plugin['Plugin']['key'] ? ' active' : '')
-				)
-			); ?>
-	<?php endforeach; ?>
-</div>
-
+<nav>
+	<div class="list-group">
+		<?php foreach($plugins as $plugin) : ?>
+			<?php echo $this->Html->link(
+					$plugin['Plugin']['name'],
+					'/' . $plugin['Plugin']['key'] . '/' . $plugin['Plugin']['default_action'],
+					array(
+						'class' => 'list-group-item' . ($this->params['plugin'] === $plugin['Plugin']['key'] ? ' active' : '')
+					)
+				); ?>
+		<?php endforeach; ?>
+	</div>
+</nav>

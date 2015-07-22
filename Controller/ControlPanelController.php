@@ -24,7 +24,9 @@ class ControlPanelController extends ControlPanelAppController {
  *
  * @var array
  */
-	//public $uses = array();
+	public $uses = array(
+		'Notifications.Notification'
+	);
 
 /**
  * use component
@@ -34,6 +36,14 @@ class ControlPanelController extends ControlPanelAppController {
 	public $components = array(
 		'ControlPanel.ControlPanelLayout'
 	);
+/**
+ * helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'NetCommons.Date',
+	);
 
 /**
  * index
@@ -41,5 +51,24 @@ class ControlPanelController extends ControlPanelAppController {
  * @return void
  */
 	public function index() {
+		if (! $this->Notification->validCacheTime()) {
+			try {
+				$notifications = $this->Notification->serializeXmlToArray();
+				//更新処理
+				$this->Notification->updateNotifications(array(
+					'Notification' => $notifications
+				));
+			} catch (XmlException $e) {
+				// Xmlが取得できなくても、エラーにしない
+			}
+		}
+
+		$notifications = $this->Notification->find('all', array(
+			'recursive' => -1,
+			'limit' => Notification::MAX_ROW,
+			'order' => array('modified' => 'desc')
+		));
+
+		$this->set('notifications', $notifications);
 	}
 }
