@@ -54,11 +54,9 @@ class ControlPanelLayoutComponent extends Component {
 
 		//Pluginデータ取得
 		if (! $this->plugins) {
-			$PluginsRole = ClassRegistry::init('PluginManager.PluginsRole');
 			$Plugin = ClassRegistry::init('PluginManager.Plugin');
-			$this->plugins = $PluginsRole->getPlugins(
+			$this->plugins = $Plugin->getPlugins(
 				$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
-				$this->controller->Auth->user('role_key'),
 				$this->controller->viewVars['languageId']
 			);
 		}
