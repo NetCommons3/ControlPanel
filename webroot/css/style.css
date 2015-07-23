@@ -13,3 +13,6 @@
 .control-panel .table td {
 	vertical-align: middle;
 }
+.frame .nc-content-list article h2.nc-title-in-panel {
+	margin-top: 0px;
+}
