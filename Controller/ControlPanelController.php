@@ -52,13 +52,17 @@ class ControlPanelController extends ControlPanelAppController {
  * @return void
  */
 	public function index() {
-		if (! $this->Notification->validCacheTime()) {
+		if (! $this->Notification->validCacheTime() && ! $this->Session->read('getNotificationError')) {
 			try {
+				$this->Session->write('getNotificationError', true);
+
 				$notifications = $this->Notification->serializeXmlToArray();
 				//更新処理
 				$this->Notification->updateNotifications(array(
 					'Notification' => $notifications
 				));
+
+				$this->Session->write('getNotificationError', false);
 			} catch (XmlException $e) {
 				// Xmlが取得できなくても、エラーにしない
 			}
