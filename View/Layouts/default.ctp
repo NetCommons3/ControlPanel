@@ -44,7 +44,15 @@
 			<div class="row">
 				<!-- container-main -->
 				<div role="main" id="container-main" class="control-panel frame col-sm-10 col-sm-push-2">
-					<?php echo $this->fetch('content'); ?>
+					<div class="nc-content-list">
+						<article>
+							<h1>
+								<?php echo $this->fetch('title'); ?>
+							</h1>
+							<hr>
+							<?php echo $this->fetch('content'); ?>
+						</article>
+					</div>
 				</div>
 
 				<!-- container-major -->
