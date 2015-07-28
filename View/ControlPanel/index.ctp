@@ -31,4 +31,4 @@
 			</div>
 		</article>
 	<?php endforeach ?>
-<?php endif; ?>
+<?php endif;
