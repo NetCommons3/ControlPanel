@@ -46,8 +46,13 @@
 				<div role="main" id="container-main" class="control-panel frame col-sm-10 col-sm-push-2">
 					<div class="nc-content-list">
 						<article>
-							<h1>
+							<h1 class="clearfix">
 								<?php echo $this->fetch('title'); ?>
+								<?php if ($subtitle = $this->fetch('subtitle')) : ?>
+								<small>
+									<?php echo $subtitle; ?>
+								</small>
+								<?php endif; ?>
 							</h1>
 							<hr>
 							<?php echo $this->fetch('content'); ?>
