@@ -53,22 +53,15 @@ class ControlPanelLayoutComponent extends Component {
 		$this->controller->set('hasControlPanel', true);
 
 		//Pluginデータ取得
-		if (! $this->plugins) {
-			$Plugin = ClassRegistry::init('PluginManager.Plugin');
-			$this->plugins = $Plugin->getPlugins(
-				$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
-				$this->controller->viewVars['languageId']
-			);
-		}
+		$Plugin = ClassRegistry::init('PluginManager.Plugin');
+		$this->plugins = $Plugin->getPlugins(
+			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
+			$this->controller->viewVars['languageId']
+		);
 
 		//ページHelperにセット
-		$results = array(
-			//'current' => $this->controller->current,
-			//'containers' => Hash::combine($page['container'], '{n}.type', '{n}'),
-			//'boxes' => Hash::combine($page['box'], '{n}.id', '{n}', '{n}.containerId'),
-			'plugins' => $this->plugins,
-		);
-		$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
+		$this->controller->set('pluginsMenu', $this->plugins);
+		//$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
 
 		//if (AuthComponent::user('id')) {
 		//	$this->controller->set('isControlPanel', true);

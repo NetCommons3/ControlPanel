@@ -63,7 +63,7 @@
 				<!-- container-major -->
 				<div id="container-major" class="control-panel col-sm-2 col-sm-pull-10">
 					<?php echo $this->element('ControlPanel.render_control_panel_menu', array(
-							'plugins' => ControlPanelLayoutHelper::$plugins
+							'plugins' => $pluginsMenu
 						)); ?>
 				</div>
 			</div>
