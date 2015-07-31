@@ -33,12 +33,12 @@ class ControlPanelLayoutComponent extends Component {
  * @return void
  */
 	public function beforeRender(Controller $controller) {
+		$this->controller = $controller;
+
 		//RequestActionの場合、スキップする
 		if (! empty($this->controller->request->params['requested'])) {
 			return;
 		}
-
-		$this->controller = $controller;
 
 		//Layoutのセット
 		$this->controller->layout = 'ControlPanel.default';
@@ -63,6 +63,10 @@ class ControlPanelLayoutComponent extends Component {
 		$this->controller->set('pluginsMenu', $this->plugins);
 		//$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
 
+		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $this->controller->params['plugin'] . ']');
+		if (isset($plugin[0]['name']) && ! isset($this->controller->viewVars['title'])) {
+			$this->controller->set('title', $plugin[0]['name']);
+		}
 		//if (AuthComponent::user('id')) {
 		//	$this->controller->set('isControlPanel', true);
 		//} else {

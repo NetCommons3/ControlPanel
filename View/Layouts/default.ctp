@@ -47,11 +47,16 @@
 					<div class="nc-content-list">
 						<article>
 							<h1 class="clearfix">
-								<?php echo $this->fetch('title'); ?>
+								<?php if ($title) : ?>
+									<?php echo $title; ?>
+								<?php else : ?>
+									<?php echo $this->fetch('title'); ?>
+								<?php endif; ?>
+								
 								<?php if ($subtitle = $this->fetch('subtitle')) : ?>
-								<small>
-									<?php echo $subtitle; ?>
-								</small>
+									<small>
+										<?php echo $subtitle; ?>
+									</small>
 								<?php endif; ?>
 							</h1>
 							<hr>
