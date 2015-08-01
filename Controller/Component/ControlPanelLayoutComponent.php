@@ -27,6 +27,28 @@ class ControlPanelLayoutComponent extends Component {
 	public $plugins = null;
 
 /**
+ * startup
+ *
+ * @param Controller $controller Controller
+ * @return void
+ */
+	public function startup(Controller $controller) {
+		$this->controller = $controller;
+
+		//RequestActionの場合、スキップする
+		if (! empty($this->controller->request->params['requested'])) {
+			return;
+		}
+
+		//Pluginデータ取得
+		$Plugin = ClassRegistry::init('PluginManager.Plugin');
+		$this->plugins = $Plugin->getPlugins(
+			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
+			$this->controller->viewVars['languageId']
+		);
+	}
+
+/**
  * beforeRender
  *
  * @param Controller $controller Controller
@@ -43,35 +65,19 @@ class ControlPanelLayoutComponent extends Component {
 		//Layoutのセット
 		$this->controller->layout = 'ControlPanel.default';
 
-		////cancelUrlをセット
-		//if (! isset($this->controller->viewVars['cancelUrl'])) {
-		//	$this->controller->set('cancelUrl', $page['page']['permalink']);
-		//}
+		//cancelUrlをセット
 		$this->controller->set('cancelUrl', '/');
 
 		$this->controller->set('isControlPanel', true);
 		$this->controller->set('hasControlPanel', true);
 
-		//Pluginデータ取得
-		$Plugin = ClassRegistry::init('PluginManager.Plugin');
-		$this->plugins = $Plugin->getPlugins(
-			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
-			$this->controller->viewVars['languageId']
-		);
-
 		//ページHelperにセット
 		$this->controller->set('pluginsMenu', $this->plugins);
-		//$this->controller->helpers['ControlPanel.ControlPanelLayout'] = $results;
 
 		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $this->controller->params['plugin'] . ']');
 		if (isset($plugin[0]['name']) && ! isset($this->controller->viewVars['title'])) {
 			$this->controller->set('title', $plugin[0]['name']);
 		}
-		//if (AuthComponent::user('id')) {
-		//	$this->controller->set('isControlPanel', true);
-		//} else {
-		//	$this->controller->set('isControlPanel', false);
-		//}
 	}
 
 }
