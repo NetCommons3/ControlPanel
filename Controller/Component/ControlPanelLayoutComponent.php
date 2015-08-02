@@ -46,21 +46,6 @@ class ControlPanelLayoutComponent extends Component {
 			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
 			$this->controller->viewVars['languageId']
 		);
-	}
-
-/**
- * beforeRender
- *
- * @param Controller $controller Controller
- * @return void
- */
-	public function beforeRender(Controller $controller) {
-		$this->controller = $controller;
-
-		//RequestActionの場合、スキップする
-		if (! empty($this->controller->request->params['requested'])) {
-			return;
-		}
 
 		//Layoutのセット
 		$this->controller->layout = 'ControlPanel.default';
