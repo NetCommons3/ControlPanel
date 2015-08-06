@@ -42,8 +42,25 @@
 
 		<main class="container-fluid">
 			<div class="row">
+				<!-- container-major -->
+				<div class="control-panel-nav col-sm-2">
+					<nav class="navbar-default">
+						<div class="clearfix">
+							<button type="button" class="btn btn-xs btn-default visible-xs-block pull-right" data-toggle="collapse" data-target="#container-major" aria-expanded="false">
+								<span class="glyphicon glyphicon-menu-hamburger"> </span>
+							</button>
+						</div>
+
+						<div id="container-major" class="collapse navbar-collapse">
+							<?php echo $this->element('ControlPanel.render_control_panel_menu', array(
+									'plugins' => $pluginsMenu
+								)); ?>
+						</div>
+					</nav>
+				</div>
+
 				<!-- container-main -->
-				<div role="main" id="container-main" class="control-panel frame col-sm-10 col-sm-push-2">
+				<div role="main" id="container-main" class="control-panel frame col-sm-10">
 					<div class="nc-content-list">
 						<article>
 							<h1 class="clearfix">
@@ -63,13 +80,6 @@
 							<?php echo $this->fetch('content'); ?>
 						</article>
 					</div>
-				</div>
-
-				<!-- container-major -->
-				<div id="container-major" class="control-panel col-sm-2 col-sm-pull-10">
-					<?php echo $this->element('ControlPanel.render_control_panel_menu', array(
-							'plugins' => $pluginsMenu
-						)); ?>
 				</div>
 			</div>
 

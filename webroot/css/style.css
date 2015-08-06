@@ -6,8 +6,25 @@
  * @license  http://www.netcommons.org/license.txt NetCommons License
  */
 
-.control-panel nav {
-	margin-top: 16px;
+@media (min-width: 768px) {
+	.control-panel-nav nav {
+		margin-top: 16px;
+	}
+	.control-panel-nav .list-group {
+		margin-bottom: 0px;
+	}
+}
+@media (max-width: 767px) {
+	.control-panel-nav nav button {
+		margin: 5px;
+	}
+	.control-panel-nav .list-group {
+		margin: 10px;
+	}
+}
+
+.control-panel-nav .navbar-collapse {
+	padding: 0px;
 }
 
 .control-panel .table td {
