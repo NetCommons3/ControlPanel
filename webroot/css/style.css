@@ -1,0 +1,35 @@
+/**
+ * bbses/css/style.css
+ *
+ * @author   Takako Miyagawa <nekoget@gmail.com>
+ * @link     http://www.netcommons.org NetCommons Project
+ * @license  http://www.netcommons.org/license.txt NetCommons License
+ */
+
+@media (min-width: 768px) {
+	.control-panel-nav nav {
+		margin-top: 16px;
+	}
+	.control-panel-nav .list-group {
+		margin-bottom: 0px;
+	}
+}
+@media (max-width: 767px) {
+	.control-panel-nav nav button {
+		margin: 5px;
+	}
+	.control-panel-nav .list-group {
+		margin: 10px;
+	}
+}
+
+.control-panel-nav .navbar-collapse {
+	padding: 0px;
+}
+
+.control-panel .table td {
+	vertical-align: middle;
+}
+.frame .nc-content-list article h2.nc-title-in-panel {
+	margin-top: 0px;
+}

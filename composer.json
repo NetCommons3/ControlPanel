@@ -1,0 +1,42 @@
+{
+    "name": "netcommons/control-panel",
+    "description": "ControlPanel for NetCommons Plugin",
+    "homepage": "http://www.netcommons.org/",
+    "extra": {
+        "installer-paths": {
+            "app/Plugin/{$name}": ["type:cakephp-plugin"]
+        }
+    },
+    "require": {
+        "cakedc/migrations":            "~2.2",
+        "cakephp/cakephp":              "~2.6.9",
+        "cakephp/debug_kit":            "~2.2",
+        "components/jquery":            "~2.1",
+        "twbs/bootstrap":               "~3.1"
+    },
+    "require-dev": {
+        "mustangostang/spyc":           "dev-master",
+        "netcommons/frames":            "dev-master",
+        "netcommons/net-commons":       "dev-master",
+        "netcommons/pages":             "dev-master",
+        "netcommons/users":             "dev-master",
+        "satooshi/php-coveralls":       "dev-master"
+    },
+    "license": "NetCommons License",
+    "authors": [
+        {
+            "name": "Shohei Nakajima",
+            "homepage": "https://github.com/s-nakajima"
+        },
+        {
+            "name": "NetCommons Community",
+            "homepage": "https://github.com/NetCommons3/ControlPanel/graphs/contributors"
+        }
+    ],
+    "type":        "cakephp-plugin",
+    "keywords":    ["cakephp", "control_panel"],
+    "config": {
+        "vendor-dir": "vendors"
+    }
+}
+
