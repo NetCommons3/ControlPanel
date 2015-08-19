@@ -26,7 +26,11 @@
 				array(
 					'/control_panel/css/style.css'
 				),
-				array('plugin' => false)
+				array(
+					'plugin' => false,
+					'once' => true,
+					'inline' => false
+				)
 			);
 			echo $this->fetch('css');
 
@@ -71,7 +75,7 @@
 								<?php endif; ?>
 
 								<?php if ($subtitle = $this->fetch('subtitle')) : ?>
-									<small>
+									<small class="control-panel-subtitle">
 										<?php echo $subtitle; ?>
 									</small>
 								<?php endif; ?>
