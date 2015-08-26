@@ -33,3 +33,7 @@
 .frame .nc-content-list article h2.nc-title-in-panel {
 	margin-top: 0px;
 }
+
+.control-panel-subtitle {
+	margin-left: 10px;
+}
