@@ -45,8 +45,7 @@ class ControlPanelLayoutComponent extends Component {
 
 		//Pluginデータ取得
 		$this->plugins = $this->Plugin->getPlugins(
-			Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL,
-			$this->controller->viewVars['languageId']
+			Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
 		);
 
 		//Layoutのセット
