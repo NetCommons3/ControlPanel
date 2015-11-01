@@ -22,16 +22,7 @@
 			echo $this->fetch('meta');
 
 			echo $this->element('NetCommons.common_css');
-			echo $this->Html->css(
-				array(
-					'/control_panel/css/style.css'
-				),
-				array(
-					'plugin' => false,
-					'once' => true,
-					'inline' => false
-				)
-			);
+			echo $this->NetCommonsHtml->css('/control_panel/css/style.css');
 			echo $this->fetch('css');
 
 			echo $this->element('NetCommons.common_js');
