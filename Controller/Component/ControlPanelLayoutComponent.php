@@ -27,18 +27,17 @@ class ControlPanelLayoutComponent extends Component {
 	public $plugins = null;
 
 /**
- * Called after the Controller::beforeFilter() and before the controller action
+ * beforeRender
  *
- * @param Controller $controller Controller with components to startup
+ * @param Controller $controller Controller
  * @return void
- * @link http://book.cakephp.org/2.0/en/controllers/components.html#Component::startup
+ * @throws NotFoundException
  */
-	public function startup(Controller $controller) {
+	public function beforeRender(Controller $controller) {
 		//RequestActionの場合、スキップする
 		if (! empty($controller->request->params['requested'])) {
 			return;
 		}
-		$this->controller = $controller;
 
 		//Modelの呼び出し
 		$this->Plugin = ClassRegistry::init('PluginManager.Plugin');
@@ -49,25 +48,25 @@ class ControlPanelLayoutComponent extends Component {
 		);
 
 		//Layoutのセット
-		$this->controller->layout = 'ControlPanel.default';
+		$controller->layout = 'ControlPanel.default';
 
 		//cancelUrlをセット
-		$this->controller->set('cancelUrl', '/');
+		$controller->set('cancelUrl', '/');
 
-		$this->controller->set('isControlPanel', true);
-		$this->controller->set('hasControlPanel', true);
+		$controller->set('isControlPanel', true);
+		$controller->set('hasControlPanel', true);
 
 		//ページHelperにセット
-		$this->controller->set('pluginsMenu', $this->plugins);
+		$controller->set('pluginsMenu', $this->plugins);
 
 		if (isset($this->settings['plugin'])) {
 			$plugin = $this->settings['plugin'];
 		} else {
-			$plugin = $this->controller->params['plugin'];
+			$plugin = $controller->params['plugin'];
 		}
 		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $plugin . ']');
-		if (isset($plugin[0]['name']) && ! isset($this->controller->viewVars['title'])) {
-			$this->controller->set('title', $plugin[0]['name']);
+		if (isset($plugin[0]['name']) && ! isset($controller->viewVars['title'])) {
+			$controller->set('title', $plugin[0]['name']);
 		}
 	}
 
