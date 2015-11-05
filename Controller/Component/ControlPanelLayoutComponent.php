@@ -40,11 +40,11 @@ class ControlPanelLayoutComponent extends Component {
 		}
 
 		//Modelの呼び出し
-		$this->Plugin = ClassRegistry::init('PluginManager.Plugin');
+		$Plugin = ClassRegistry::init('PluginManager.Plugin');
 
 		//Pluginデータ取得
-		$this->plugins = $this->Plugin->getPlugins(
-			Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
+		$this->plugins = $Plugin->getPlugins(
+			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
 		);
 
 		//Layoutのセット
