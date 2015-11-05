@@ -27,6 +27,22 @@ class ControlPanelLayoutComponent extends Component {
 	public $plugins = null;
 
 /**
+ * Called after the Controller::beforeFilter() and before the controller action
+ *
+ * @param Controller $controller Controller with components to startup
+ * @return void
+ * @link http://book.cakephp.org/2.0/en/controllers/components.html#Component::startup
+ */
+	public function startup(Controller $controller) {
+		//RequestActionの場合、スキップする
+		if (! empty($controller->request->params['requested'])) {
+			return;
+		}
+		//Modelの呼び出し
+		$this->Plugin = ClassRegistry::init('PluginManager.Plugin');
+	}
+
+/**
  * beforeRender
  *
  * @param Controller $controller Controller
@@ -39,12 +55,9 @@ class ControlPanelLayoutComponent extends Component {
 			return;
 		}
 
-		//Modelの呼び出し
-		$Plugin = ClassRegistry::init('PluginManager.Plugin', true);
-
 		//Pluginデータ取得
-		$this->plugins = $Plugin->getPlugins(
-			$Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
+		$this->plugins = $this->Plugin->getPlugins(
+			Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
 		);
 
 		//Layoutのセット

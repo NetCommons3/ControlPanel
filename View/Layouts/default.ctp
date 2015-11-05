@@ -57,20 +57,24 @@
 				<!-- container-main -->
 				<div role="main" id="container-main" class="control-panel col-sm-10">
 					<article>
-						<h1 class="clearfix">
-							<?php if (isset($title) && $title) : ?>
+						<?php
+							if (! isset($title)) {
+								$title = $this->fetch('title');
+							}
+						?>
+						<?php if ($title) : ?>
+							<h1 class="clearfix">
 								<?php echo $title; ?>
-							<?php else : ?>
-								<?php echo $this->fetch('title'); ?>
-							<?php endif; ?>
-
-							<?php if ($subtitle = $this->fetch('subtitle')) : ?>
-								<small class="control-panel-subtitle">
-									<?php echo $subtitle; ?>
-								</small>
-							<?php endif; ?>
-						</h1>
-						<hr>
+								<?php if ($subtitle = $this->fetch('subtitle')) : ?>
+									<small class="control-panel-subtitle">
+										<?php echo $subtitle; ?>
+									</small>
+								<?php endif; ?>
+							</h1>
+							<hr>
+						<?php else : ?>
+							<br>
+						<?php endif; ?>
 						<?php echo $this->fetch('content'); ?>
 					</article>
 				</div>
