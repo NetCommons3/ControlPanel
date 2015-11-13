@@ -22,16 +22,7 @@
 			echo $this->fetch('meta');
 
 			echo $this->element('NetCommons.common_css');
-			echo $this->Html->css(
-				array(
-					'/control_panel/css/style.css'
-				),
-				array(
-					'plugin' => false,
-					'once' => true,
-					'inline' => false
-				)
-			);
+			echo $this->NetCommonsHtml->css('/control_panel/css/style.css');
 			echo $this->fetch('css');
 
 			echo $this->element('NetCommons.common_js');
@@ -39,7 +30,7 @@
 		?>
 	</head>
 
-	<body ng-controller="NetCommons.base">
+	<body ng-controller="NetCommons.base" ng-init="baseUrl='<?php echo h(Configure::read('App.fullBaseUrl')) ?>';">
 		<?php echo $this->Session->flash(); ?>
 
 		<?php echo $this->element('NetCommons.common_header', array('container' => 'container-fluid')); ?>
@@ -64,16 +55,16 @@
 				</div>
 
 				<!-- container-main -->
-				<div role="main" id="container-main" class="control-panel frame col-sm-10">
-					<div class="nc-content-list">
-						<article>
+				<div role="main" id="container-main" class="control-panel col-sm-10">
+					<article>
+						<?php
+							if (! isset($title)) {
+								$title = $this->fetch('title');
+							}
+						?>
+						<?php if ($title) : ?>
 							<h1 class="clearfix">
-								<?php if (isset($title) && $title) : ?>
-									<?php echo $title; ?>
-								<?php else : ?>
-									<?php echo $this->fetch('title'); ?>
-								<?php endif; ?>
-
+								<?php echo $title; ?>
 								<?php if ($subtitle = $this->fetch('subtitle')) : ?>
 									<small class="control-panel-subtitle">
 										<?php echo $subtitle; ?>
@@ -81,9 +72,11 @@
 								<?php endif; ?>
 							</h1>
 							<hr>
-							<?php echo $this->fetch('content'); ?>
-						</article>
-					</div>
+						<?php else : ?>
+							<br>
+						<?php endif; ?>
+						<?php echo $this->fetch('content'); ?>
+					</article>
 				</div>
 			</div>
 
