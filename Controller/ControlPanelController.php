@@ -65,6 +65,7 @@ class ControlPanelController extends ControlPanelAppController {
 				$this->Session->write('getNotificationError', false);
 			} catch (XmlException $e) {
 				// Xmlが取得できなくても、エラーにしない
+				CakeLog::error($e);
 			}
 		}
 
