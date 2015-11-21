@@ -35,7 +35,7 @@ class ControlPanelLayoutComponent extends Component {
  */
 	public function beforeRender(Controller $controller) {
 		//RequestActionの場合、スキップする
-		if (! empty($controller->request->params['requested'])) {
+		if (! empty($controller->request->params['requested']) || $controller->request->is('ajax')) {
 			return;
 		}
 
