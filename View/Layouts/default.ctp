@@ -33,9 +33,9 @@
 	<body ng-controller="NetCommons.base" ng-init="baseUrl='<?php echo h(Configure::read('App.fullBaseUrl')) ?>';">
 		<?php echo $this->Session->flash(); ?>
 
-		<?php echo $this->element('NetCommons.common_header', array('container' => 'container-fluid')); ?>
+		<?php echo $this->element('NetCommons.common_header', array('container' => 'container')); ?>
 
-		<main class="container-fluid">
+		<main class="container">
 			<div class="row">
 				<!-- container-major -->
 				<div class="control-panel-nav col-sm-2">
