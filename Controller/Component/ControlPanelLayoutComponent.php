@@ -44,7 +44,7 @@ class ControlPanelLayoutComponent extends Component {
 		$controller->PluginsRole = ClassRegistry::init('PluginManager.PluginsRole', true);
 		$this->plugins = $controller->PluginsRole->getPlugins(
 			array(Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER),
-			Current::read('User.role_key')
+			Current::read('User.role_key'), 'INNER'
 		);
 
 		//Layoutのセット
