@@ -41,8 +41,10 @@ class ControlPanelLayoutComponent extends Component {
 
 		//Pluginデータ取得
 		$controller->Plugin = ClassRegistry::init('PluginManager.Plugin', true);
-		$this->plugins = $controller->Plugin->getPlugins(
-			Plugin::PLUGIN_TYPE_FOR_CONTROL_PANEL
+		$controller->PluginsRole = ClassRegistry::init('PluginManager.PluginsRole', true);
+		$this->plugins = $controller->PluginsRole->getPlugins(
+			array(Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER),
+			Current::read('User.role_key')
 		);
 
 		//Layoutのセット
