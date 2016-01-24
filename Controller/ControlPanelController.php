@@ -55,14 +55,15 @@ class ControlPanelController extends ControlPanelAppController {
 		if (! $this->Notification->validCacheTime() && ! $this->Session->read('getNotificationError')) {
 			try {
 				$this->Session->write('getNotificationError', true);
-
-				$notifications = $this->Notification->serializeXmlToArray();
-				//更新処理
-				$this->Notification->updateNotifications(array(
-					'Notification' => $notifications
-				));
-
-				$this->Session->write('getNotificationError', false);
+				//サイトの生死確認
+				if ($this->Notification->ping()) {
+					$this->Notification->serializeXmlToArray();
+					//更新処理
+					$this->Notification->updateNotifications(array(
+						'Notification' => $notifications
+					));
+					$this->Session->write('getNotificationError', false);
+				}
 			} catch (XmlException $e) {
 				// Xmlが取得できなくても、エラーにしない
 				CakeLog::error($e);
