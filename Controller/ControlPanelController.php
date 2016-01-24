@@ -57,7 +57,7 @@ class ControlPanelController extends ControlPanelAppController {
 				$this->Session->write('getNotificationError', true);
 				//サイトの生死確認
 				if ($this->Notification->ping()) {
-					$this->Notification->serializeXmlToArray();
+					$notifications = $this->Notification->serializeXmlToArray();
 					//更新処理
 					$this->Notification->updateNotifications(array(
 						'Notification' => $notifications
