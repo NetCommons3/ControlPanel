@@ -1,6 +1,6 @@
 <?php
 /**
- * major index template
+ * コントロールパネル用のメニュー Element
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -11,13 +11,18 @@
 ?>
 
 <div class="list-group">
-	<?php foreach($plugins as $plugin) : ?>
-		<?php echo $this->Html->link(
-				$plugin['Plugin']['name'],
+	<?php
+		foreach ($plugins as $plugin) {
+			$classes = array(
+				'list-group-item'
+			);
+			if ($this->params['plugin'] === $plugin['Plugin']['key']) {
+				$classes[] = 'active';
+			}
+			echo $this->NetCommonsHtml->link($plugin['Plugin']['name'],
 				'/' . $plugin['Plugin']['key'] . '/' . $plugin['Plugin']['default_action'] . '/',
-				array(
-					'class' => 'list-group-item' . ($this->params['plugin'] === $plugin['Plugin']['key'] ? ' active' : '')
-				)
-			); ?>
-	<?php endforeach; ?>
+				array('class' => $classes)
+			);
+		}
+	?>
 </div>
