@@ -69,6 +69,8 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
  * @return void
  */
 	public function testIndex() {
+		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR);
+
 		//Mockの設定
 		$this->_mockForReturn('Notifications.Notification', 'serialize', true);
 		$this->_mockForReturn('Notifications.Notification', 'updateNotifications', true);
@@ -92,6 +94,8 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
  * @throws XmlException
  */
 	public function testIndexOnXmlException() {
+		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR);
+
 		//Mockの設定
 		$this->controller->Notification->expects($this->once())
 			->method('serialize')
@@ -105,5 +109,20 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
 		));
 
 		$this->assertCount(1, $this->vars['notifications']);
+	}
+
+/**
+ * ログインなしのテスト
+ *
+ * @return void
+ * @throws XmlException
+ */
+	public function testIndexWOLogin() {
+		//テスト実行
+		$this->_testNcAction('/control_panel/control_panel/index', array(
+			'method' => 'get'
+		));
+
+		$this->assertEqual(substr($this->headers['Location'], -5), 'login');
 	}
 }
