@@ -51,7 +51,7 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
 		parent::setUp();
 		$this->generateNc('ControlPanel.ControlPanel', array(
 			'components' => array(
-				'ControlPanelLayout'
+				'ControlPanel.ControlPanelLayout',
 			)
 		));
 
