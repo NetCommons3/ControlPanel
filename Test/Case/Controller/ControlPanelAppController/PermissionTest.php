@@ -10,6 +10,7 @@
  */
 
 App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
+App::uses('UserRole', 'UserRoles.Model');
 
 /**
  * ControlPanelController::index()のテスト
@@ -56,63 +57,53 @@ class ControlPanelAppControllerPermissionTest extends NetCommonsControllerTestCa
 	}
 
 /**
- * システム管理者のアクセスチェック
+ * アクセスチェック用DataProvider
  *
- * @return void
+ * ### 戻り値
+ *  - role 会員権限、nullはログインなし
+ *  - exception Exception文字列
+ *
+ * @return array
  */
-	public function testPermissionBySystemAdmin() {
-		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR);
+	public function dataProvider() {
+		$results = array();
 
-		//テスト実行
-		$this->_testNcAction('/test_control_panel/test_control_panel_app/index', array(
-			'method' => 'get'
-		));
+		//テストデータ
+		// * ログインなし
+		$results[0] = array('role' => null, 'exception' => 'ForbiddenException');
+		// * 一般権限
+		$results[1] = array('role' => UserRole::USER_ROLE_KEY_COMMON_USER, 'exception' => 'ForbiddenException');
+		// * サイト権限
+		$results[2] = array('role' => UserRole::USER_ROLE_KEY_ADMINISTRATOR, 'exception' => false);
+		// * システム権限
+		$results[3] = array('role' => UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR, 'exception' => false);
 
-		$this->assertNotEmpty($this->view);
+		return $results;
 	}
 
 /**
- * サイト管理者のアクセスチェック
+ * アクセスチェック
  *
+ * @param string|null $role 会員権限、nullはログインなし
+ * @param string $exception Exception文字列
+ * @dataProvider dataProvider
  * @return void
  */
-	public function testPermissionBySiteAdmin() {
-		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_ADMINISTRATOR);
+	public function testPermission($role, $exception) {
+		if (isset($role)) {
+			TestAuthGeneral::login($this, $role);
+		}
+		if ($exception) {
+			$this->setExpectedException($exception);
+		}
 
 		//テスト実行
 		$this->_testNcAction('/test_control_panel/test_control_panel_app/index', array(
 			'method' => 'get'
 		));
 
-		$this->assertNotEmpty($this->view);
-	}
-
-/**
- * 一般ユーザのアクセスチェック
- *
- * @return void
- */
-	public function testPermissionByCommonAdmin() {
-		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_COMMON_USER);
-		$this->setExpectedException('ForbiddenException');
-
-		//テスト実行
-		$this->_testNcAction('/test_control_panel/test_control_panel_app/index', array(
-			'method' => 'get'
-		));
-	}
-
-/**
- * ログインなしのアクセスチェック
- *
- * @return void
- */
-	public function testPermissionWOLogin() {
-		$this->setExpectedException('ForbiddenException');
-
-		//テスト実行
-		$this->_testNcAction('/test_control_panel/test_control_panel_app/index', array(
-			'method' => 'get'
-		));
+		if (! $exception) {
+			$this->assertNotEmpty($this->view);
+		}
 	}
 }
