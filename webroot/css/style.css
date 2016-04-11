@@ -78,3 +78,8 @@
 .control-panel article  .h3 {
 	font-size: 16px;
 }
+
+.control-panel article h3.popover-title {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
