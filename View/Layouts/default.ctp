@@ -56,7 +56,7 @@
 
 				<!-- container-main -->
 				<div role="main" id="container-main" class="control-panel col-sm-10">
-					<article>
+					<article class="<?php echo 'plugin-' . strtr(Current::read('Plugin.key', ''), '_', '-'); ?>">
 						<?php
 							if (! isset($title)) {
 								$title = $this->fetch('title');
