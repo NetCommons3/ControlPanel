@@ -77,5 +77,6 @@ class ControlPanelController extends ControlPanelAppController {
 		));
 
 		$this->set('notifications', $notifications);
+		$this->set('title', __d('notifications', 'Notifications'));
 	}
 }

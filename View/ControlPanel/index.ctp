@@ -10,8 +10,6 @@
  */
 ?>
 
-<?php $this->assign('title', __d('notifications', 'Notifications')); ?>
-
 <?php if ($notifications) : ?>
 	<?php foreach ($notifications as $notification): ?>
 		<article>

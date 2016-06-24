@@ -84,7 +84,7 @@ class ControlPanelLayoutComponentBeforeRenderTest extends NetCommonsControllerTe
 		//チェック
 		// * ControlPanelLayoutComponentのチェック
 		$this->assertEquals('ControlPanel.default', $this->controller->layout);
-		$this->assertCount(3, $this->vars['pluginsMenu']);
+		$this->assertCount(4, $this->vars['pluginsMenu']);
 		$this->assertEquals($this->vars['pluginsMenu'], $this->controller->ControlPanelLayout->plugins);
 		$this->assertEquals($this->vars['title'], Inflector::humanize('test_control_panel'));
 
