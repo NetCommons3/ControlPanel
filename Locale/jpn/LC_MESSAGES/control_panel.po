@@ -21,3 +21,6 @@ msgstr "管理"
 msgid "Back to the Rooms"
 msgstr "管理終了"
 
+#: NetCommons/View/Elements/common_header.ctp:77
+msgid "Control Panel Top"
+msgstr "トップ"
