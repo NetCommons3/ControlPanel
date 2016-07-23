@@ -23,4 +23,4 @@ msgstr "管理終了"
 
 #: NetCommons/View/Elements/common_header.ctp:77
 msgid "Control Panel Top"
-msgstr "トップ"
+msgstr "管理トップ"
