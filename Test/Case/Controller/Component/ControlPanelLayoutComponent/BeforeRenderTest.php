@@ -92,8 +92,7 @@ class ControlPanelLayoutComponentBeforeRenderTest extends NetCommonsControllerTe
 		$pattern = '/ng-app="NetCommonsApp"/';
 		$this->assertRegExp($pattern, $this->contents);
 
-		$pattern = '/<body ng-controller="NetCommons.base" ' .
-					'ng-init="baseUrl=\'' . preg_quote(h(Configure::read('App.fullBaseUrl')), '/') . '\';">/';
+		$pattern = '/<body ng-controller="NetCommons.base">/';
 		$this->assertRegExp($pattern, $this->contents);
 
 		$pattern = '/<div class="control-panel-nav col-sm-2">/';
