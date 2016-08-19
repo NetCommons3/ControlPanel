@@ -16,7 +16,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title><?php echo (isset($pageTitle) ? h($pageTitle) : ''); ?></title>
+		<title><?php echo (isset($pageTitle) ? h($pageTitle) . ' - ' . SiteSettingUtil::read('App.site_name') : ''); ?></title>
 
 		<?php
 			echo $this->html->meta('icon', '/net_commons/favicon.ico');
