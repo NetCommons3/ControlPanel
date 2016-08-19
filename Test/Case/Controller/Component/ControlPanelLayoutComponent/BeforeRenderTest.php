@@ -86,7 +86,7 @@ class ControlPanelLayoutComponentBeforeRenderTest extends NetCommonsControllerTe
 		$this->assertEquals('ControlPanel.default', $this->controller->layout);
 		$this->assertCount(4, $this->vars['pluginsMenu']);
 		$this->assertEquals($this->vars['pluginsMenu'], $this->controller->ControlPanelLayout->plugins);
-		$this->assertEquals($this->vars['title'], Inflector::humanize('test_control_panel'));
+		$this->assertEquals($this->vars['title'], Inflector::humanize('test_control_panel') . ' - ');
 
 		// * View/Layout/defaultのチェック
 		$pattern = '/ng-app="NetCommonsApp"/';
