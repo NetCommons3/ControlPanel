@@ -13,11 +13,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: NetCommons/View/Elements/common_header.ctp:77
+#: ControlPanel/Controller/Component/ControlPanelLayoutComponent.php:48
+msgid "Control Panel Top"
+msgstr ""
+
+#: NetCommons/View/Elements/common_header.ctp:62
 msgid "Control Panel"
 msgstr ""
 
-#: NetCommons/View/Elements/common_header.ctp:79
+#: NetCommons/View/Elements/common_header.ctp:65
 msgid "Back to the Rooms"
 msgstr ""
 
