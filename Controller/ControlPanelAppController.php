@@ -25,7 +25,7 @@ class ControlPanelAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		//アクセスの権限
+		// アクセスの権限
 		'NetCommons.Permission' => array(
 			'type' => PermissionComponent::CHECK_TYPE_CONTROL_PANEL,
 			'allow' => array()
