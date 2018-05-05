@@ -66,17 +66,21 @@ class ControlPanelLayoutComponent extends Component {
 		$controller->set('pluginsMenu', $this->plugins);
 
 		if (isset($this->settings['plugin'])) {
-			$plugin = $this->settings['plugin'];
+			$pluginKey = $this->settings['plugin'];
 		} else {
-			$plugin = $controller->params['plugin'];
+			$pluginKey = $controller->params['plugin'];
 		}
-
-		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $plugin . ']');
-		if (isset($plugin[0]['name'])) {
-			if (! isset($controller->viewVars['title'])) {
-				$controller->set('title', $plugin[0]['name']);
+		foreach ($this->plugins as $plugin) {
+			if ($plugin['Plugin']['key'] === $pluginKey) {
+				$pluginName = $plugin['Plugin']['name'];
+				break;
 			}
-			$controller->set('pageTitle', $plugin[0]['name']);
+		}
+		if (!empty($pluginName)) {
+			if (! isset($controller->viewVars['title'])) {
+				$controller->set('title', $pluginName);
+			}
+			$controller->set('pageTitle', $pluginName);
 		}
 	}
 
