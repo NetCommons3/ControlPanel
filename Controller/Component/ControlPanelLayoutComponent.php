@@ -28,34 +28,6 @@ class ControlPanelLayoutComponent extends Component {
 	public $plugins = null;
 
 /**
- * Called before the Controller::beforeFilter().
- *
- * TODO: 当処理は、管理画面測定用なので、masterブランチにはコミットしない
- *
- * @param Controller $controller Controller with components to initialize
- * @return void
- * @link https://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize
- */
-	public function initialize(Controller $controller) {
-		DebugTimer::start('plugin_timer', $controller->request->here);
-		parent::initialize($controller);
-	}
-
-/**
- * Called after Controller::render() and before the output is printed to the browser.
- *
- * TODO: 当処理は、管理画面測定用なので、masterブランチにはコミットしない
- *
- * @param Controller $controller Controller with components to shutdown
- * @return void
- * @link https://book.cakephp.org/2.0/en/controllers/components.html#Component::shutdown
- */
-	public function shutdown(Controller $controller) {
-		parent::shutdown($controller);
-		DebugTimer::stop('plugin_timer');
-	}
-
-/**
  * beforeRender
  *
  * @param Controller $controller Controller
