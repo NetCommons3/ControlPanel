@@ -56,11 +56,6 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
 		));
 
 		CakeSession::write('getNotificationError', null);
-
-		$this->controller->Notification = $this->getMockForModel('Notifications.Notification',
-				array('validCacheTime', 'ping', 'serialize', 'updateNotifications'));
-		$this->_mockForReturn('Notifications.Notification', 'validCacheTime', false);
-		$this->_mockForReturn('Notifications.Notification', 'ping', true);
 	}
 
 /**
@@ -69,6 +64,11 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
  * @return void
  */
 	public function testIndex() {
+		$this->controller->Notification = $this->getMockForModel('Notifications.Notification',
+				array('validCacheTime', 'ping', 'serialize', 'updateNotifications'));
+		$this->_mockForReturn('Notifications.Notification', 'validCacheTime', false);
+		$this->_mockForReturn('Notifications.Notification', 'ping', true);
+
 		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR);
 
 		//Mockの設定
@@ -94,6 +94,11 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
  * @throws XmlException
  */
 	public function testIndexOnXmlException() {
+		$this->controller->Notification = $this->getMockForModel('Notifications.Notification',
+				array('validCacheTime', 'ping', 'serialize', 'updateNotifications'));
+		$this->_mockForReturn('Notifications.Notification', 'validCacheTime', false);
+		$this->_mockForReturn('Notifications.Notification', 'ping', true);
+
 		TestAuthGeneral::login($this, UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR);
 
 		//Mockの設定
@@ -115,14 +120,16 @@ class ControlPanelControllerIndexTest extends NetCommonsControllerTestCase {
  * ログインなしのテスト
  *
  * @return void
- * @throws XmlException
  */
 	public function testIndexWOLogin() {
 		//テスト実行
-		$this->_testNcAction('/control_panel/control_panel/index', array(
-			'method' => 'get'
-		));
-
-		$this->assertEqual(substr($this->headers['Location'], -5), 'login');
+		$this->_testNcAction(
+			'/control_panel/control_panel/index',
+			array(
+				'method' => 'get'
+			),
+			'ForbiddenException'
+		);
+		//$this->assertEqual(substr($this->headers['Location'], -5), 'login');
 	}
 }
