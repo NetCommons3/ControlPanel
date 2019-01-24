@@ -19,7 +19,7 @@
 		<title><?php echo (isset($pageTitle) ? h($pageTitle) . ' - ' . SiteSettingUtil::read('App.site_name') : ''); ?></title>
 
 		<?php
-			echo $this->html->meta('icon', '/net_commons/favicon.ico');
+			echo $this->element('NetCommons.common_favicon');
 			echo $this->fetch('meta');
 
 			echo $this->element('NetCommons.common_css');
